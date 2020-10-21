@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+let socket = new WebSocket('ws://localhost:8000/ws/');
+let timer = null;
+socket.onopen = () => {
+    timer = setInterval(() => {
+        socket.send('hello');
+    }, 1000);
+};
+socket.onclose = socket.onerror = () => {
+    clearInterval(timer);
+};
+</script>
+</body>
+</html>
